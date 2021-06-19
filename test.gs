@@ -19,5 +19,24 @@ function test_getReceipt()
 
 function test_sendEmail()
 {
-  sendEmail("456", "test", "test"); // an error testcase
+  //sendEmail("456", "test", "test"); // an error testcase
+  var html = HtmlService.createHtmlOutputFromFile('Receipt').getContent();
+  console.log(html);
+  sendEmail("peterchen33011@gmail.com", "test", html ); 
+}
+
+function test_receipt()
+{
+  var html = HtmlService.createHtmlOutputFromFile('Receipt');
+  Logger.log(html);
+  var output = HtmlService.createHtmlOutput(html);
+  Logger.log(output.getContent());
+
+}
+
+// deploy as web app to see html layout
+function doGet() {
+  var template = HtmlService.createTemplateFromFile('Receipt');
+  Logger.log(template.evaluate().getContent());
+  return template.evaluate();
 }
