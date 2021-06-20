@@ -1,19 +1,35 @@
-<!--
-
 <!DOCTYPE html>
+
+<script>
+
+  var data = <?!= JSON.stringify(dataFromServerTemplate) ?>; //Stores the data directly in the javascript code
+  // sample usage
+  function initialize()
+  {
+    document.getElementById("myTitle").innerText = data['ship_fee'] + " - " + data['final_price'];
+    //or use jquery:  $("#myTitle").text(data.first + " - " + data.last);
+  }
+  // use onload or use jquery to call your initialization after the document loads
+  window.onload = initialize;
+
+</script>
+
 <html>
   <head>
     <base target="_top">
   </head>
   <body>
-    
+
+    <H2 id="myTitle"></H2>
+
+    <h1 style="font-size:16px;">-----轉帳匯款資訊------------</h1>
+
+    <p>
+      銀行名稱：第一商業銀行(代碼:007)<br>
+      分行名稱：長泰分行<br>
+      戶名：德裕菖有限公司<br>
+      帳號：212-10-133433
+    </p>
+
   </body>
 </html>
-
--->
-
-<b>"-----轉帳匯款資訊------------"<br/>
-<b>"銀行名稱：第一商業銀行(代碼:007)"<br/>
-<b>"分行名稱：長泰分行"<br/>
-<b>"戶名：德裕菖有限公司"<br/>
-<b>"帳號：212-10-133433"<br/>

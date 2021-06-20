@@ -7,27 +7,7 @@
  * Author: Elizabeth Lai, Hsing-Yu Chen
  */
 
-/* 
-    Hi Elizabeth:
-
-      * The reason why your previous script doesn't work is that it links to your form, not your spreadsheet, hence it receives differet 
-        format of trigger output. You are supposed to OPEN THE SCRIPT FROM THE SPREADSHEET, NOT FROM THE FORM. 
-        See more info: https://stackoverflow.com/questions/43429161/how-to-get-form-values-in-the-submit-event-handler/43433069#comment120256207_43433069
-
-      * Your DAILY EMAIL QUOTA (i.e. maximum number allowed to send per day) IS LIMITED. I believe it's 100 per day as a free account.
-        Therefore, you need to consdier how many customers to handle per day, if approach to 100/day or more, you need to upgrade to 
-        business account.
-        See more info: https://developers.google.com/apps-script/guides/services/quotas
-
-      * You may want to use "取得預先填入的連結" from your form to set up default purchase number to 0, so that customers don't have to 
-        set every item to 0 when they don't wanna buy it. 
-
-      * Now the code is supposed to work and send email to orderers. I will take time to implement remaining functions when convenient. Have fun
-        and give me feedbacks if any.
-    
-    Best Regards,
-    Hsing-Yu, 6/19/2021
-*/
+var sheet_id = "1h3fw6dLrQ3GUma_dbyQn0ODj2VPC_RiQ7DOPXE11cRA";
 
 function onSubmit(data) {
 
@@ -79,7 +59,7 @@ function getReceipt(namedValues) {
   
   var pickup;//取貨方式
   
-  pickup=namedValues["寄件方式"] ? namedValues["寄件方式"][0]:"" ;
+  pickup = namedValues["寄件方式"] ? namedValues["寄件方式"][0]:"" ;
   
   for (i = 0; i < n; i++) {
     v= namedValues[field[i]] ? namedValues[field[i]][0]:"" ;
@@ -138,7 +118,7 @@ function sendEmail( recipient, title, content )
     });
   } 
   catch (error) {
-    //Todo: maybe label in spreadsheet that the recipient doesn't receive an email
+    //Todo: maybe mark this recipient didn't receive an email
     Logger.log("failed attempt to send email to : " + recipient + " , remaining email quota: " + MailApp.getRemainingDailyQuota()); 
     return;
   }
