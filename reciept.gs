@@ -1,3 +1,9 @@
+/* Script to parse order detail and pass to receipt template and get loaded html. Also enabled web-app deployment to 
+ * test html layout.
+ * 
+ * Author: Elizabeth Lai, Hsing-Yu Chen
+ */
+
 // deploy as web app to see html layout
 function doGet() {
   return getReceipt(test_data);
@@ -34,12 +40,12 @@ function parseOrder(data)
   }
   ret['order_table'] = order_table, ret['init_price'] = init_price;
 
-  ret = Object.assign({},ret, calcDiscount(data, init_price));
+  ret = Object.assign({}, ret, parseDiscount(data, init_price));
   //Logger.log(ret);
   return ret;
 }
 
-function calcDiscount(data, init_price)
+function parseDiscount(data, init_price)
 {
   var ret = {}
   var order = data.namedValues;
