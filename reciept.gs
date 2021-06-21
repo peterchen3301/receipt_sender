@@ -1,10 +1,10 @@
-/* Script to parse order detail and pass to receipt template and get loaded html. Also enabled web-app deployment to 
- * test html layout.
+/* Script to organize order details and solve for discounted price, pass to receipt template and get loaded html. 
+ * Also enabled web-app deployment to test html layout.
  * 
  * Author: Elizabeth Lai, Hsing-Yu Chen
  */
 
-// deploy as web app to see html layout
+// deploy as web-app to see html layout
 function doGet() {
   return getReceipt(test_data);
 }
@@ -27,7 +27,6 @@ function parseOrder(data)
   var order_table = [['品項','單價','購買數量','總價']];
   var init_price = 0, final_price;
   var prices = getMap('price_list');
-  var freeShipping = false;
 
   for (var item in prices) 
   {

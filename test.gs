@@ -32,7 +32,8 @@
   "range":{"columnEnd":24,"columnStart":1,"rowEnd":10,"rowStart":10},
   "source":{},
   "triggerUid":"7535632",
-  "values":["2021/6/19 上午 12:37:34","Hsing-Yu Chen","123456789","peterchen33011@gmail.com","0","0","0","0","0","0","0","0","7-11 (運費60)","test test","123456789","123456789","取貨付款","","","","","","test","peterchen33011@gmail.com",""]}
+  "values":["2021/6/19 上午 12:37:34","Hsing-Yu Chen","123456789","peterchen33011@gmail.com","0","0","0","0","0","0","0","0","7-11 (運費60)","test test","123456789","123456789","取貨付款","","","","","","test","peterchen33011@gmail.com",""]
+}
 
 function test_onSubmit()
 {
