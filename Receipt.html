@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 
-<script>
-
-  var data = <?!= JSON.stringify(dataFromServerTemplate) ?>; //Stores the data directly in the javascript code
-  // sample usage
-  function initialize()
-  {
-    document.getElementById("myTitle").innerText = data['ship_fee'] + " - " + data['final_price'];
-    //or use jquery:  $("#myTitle").text(data.first + " - " + data.last);
-  }
-  // use onload or use jquery to call your initialization after the document loads
-  window.onload = initialize;
-
-</script>
-
 <html>
   <head>
     <base target="_top">
+
+    <style>
+      table{
+        width: 50%;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
 
-    <H2 id="myTitle"></H2>
+    <? 
+      var json = JSON.stringify(dataFromServerTemplate);  
+      var obj = JSON.parse(json);
+    ?>
 
+    <table>
+        <tr>
+          <? for (var j = 0; j < obj.order_table[0].length; j++) { ?>
+            <th><?= obj.order_table[0][j] ?></th>
+          <? } ?>
+        </tr>
+        <? for (var i = 1; i < obj.order_table.length; i++) { ?>
+          <tr>
+            <? for (var j = 0; j < obj.order_table[i].length; j++) { ?>
+              <td><?= obj.order_table[i][j] ?></td>
+            <? } ?>
+          </tr>
+        <? } ?>
+    </table>
+
+    <p>
+      原價：<?= obj.init_price ?><br>
+      折扣：<?= obj.refund ?><br>
+      運送方式：<?= obj.ship_method ?><br>
+      運費：<?= obj.ship_fee ?>
+    </p>
+    <p><b>
+      總費用為：<?= obj.final_price ?>
+    </b></p>
+    
     <h1 style="font-size:16px;">-----轉帳匯款資訊------------</h1>
 
     <p>

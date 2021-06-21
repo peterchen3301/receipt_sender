@@ -7,8 +7,6 @@
  * Author: Elizabeth Lai, Hsing-Yu Chen
  */
 
-var sheet_id = "1h3fw6dLrQ3GUma_dbyQn0ODj2VPC_RiQ7DOPXE11cRA";
-
 function onSubmit(data) {
 
   //Loggers.log("onSubmit called");
@@ -18,94 +16,9 @@ function onSubmit(data) {
       namedValues = data.namedValues;
       notifyEmail = namedValues[emailTitle] ? namedValues[emailTitle][0]:"";
 
-  var content = getReceipt(namedValues);
+  var content = getReceipt(data).getContent();
   sendEmail( notifyEmail, subject, content );
   return;
-}
-
-function getReceipt(namedValues) {
-
-  var html = "", total_price = 0;
-
-  //設定產品價格
-  var price={ 
-    "FNI 醇品植物奶 (盒裝，一盒20+8入) $450/盒":450,
-    "<<<箱購>>> FNI 醇品植物奶 (盒裝，一盒20+8入) 8盒 $3500":3500,
-    "FNI 醇品植物奶 (袋裝，一袋15入)   $200/袋":200,
-    "<<<箱購>>> FNI 醇品植物奶 (袋裝，一袋15入) 20袋 4000元":4000,
-    "FNI 醇品豆漿粉(500g/袋) $150":150,
-    "<<<箱購>>> FNI 醇品豆漿粉 (500g/袋，共20+2袋) $3000/箱":3000,
-    "FNI 醇品豆漿粉(40%蛋白質) (500g/袋) $250/袋":250,
-    "<<<箱購>>> FNI 醇品豆漿粉(40%蛋白質) (500g/袋，共20+2袋) $5000/箱":5000
-    };
-    
-  var money=0;
-  
-  var free_shipping_money=3000; //設定免運費金額
-  
-  var freight_A=65;//設定運費金額
-  
-  var freight_B=150;//設定運費金額
-  
-  var n=data.values.length;
-  
-  var fields="";
-  
-  var field=["時間戳記","電子郵件地址","FNI 醇品植物奶 (盒裝，一盒20+8入) $450/盒","<<<箱購>>> FNI 醇品植物奶 (盒裝，一盒20+8入) 8盒 $3500","FNI 醇品植物奶 (袋裝，一袋15入) $200/袋","<<<箱購>>> FNI 醇品植物奶 (袋裝，一袋15入) 20袋 4000元","FNI 醇品豆漿粉(500g/袋) $150","<<<箱購>>> FNI 醇品豆漿粉 (500g/袋，共20+2袋) $3000/箱","FNI 醇品豆漿粉(40%蛋白質) (500g/袋) $250/袋","訂購者姓名","訂購者電話","訂購者Email","寄件方式","取件人大名","取件人電話","請問您要取件之店名、店號為？","取貨付款？純取貨？","收件人姓名","收件人地址","收件人連絡電話","希望商品之送達時段","取貨付款？純取貨？","其他問題"]
-  
-  var d="";
-  
-  var i,j;
-  
-  var pickup;//取貨方式
-  
-  pickup = namedValues["寄件方式"] ? namedValues["寄件方式"][0]:"" ;
-  
-  for (i = 0; i < n; i++) {
-    v= namedValues[field[i]] ? namedValues[field[i]][0]:"" ;
-    if(v!="")//有輸入的資料才顯示
-    {
-      html+=field[i]+":"+v+"<br/>";
-      if(price[field[i]]!=undefined) //有價格才計算
-        money+=price[field[i]]*v;         
-     }
-  }
-  
-  html+="您購買"+money+"元<br/>";
-  
-  if(pickup=="7-11 (運費60)")  
-  {
-          if(money<free_shipping_money) 
-          {
-                money+=freight_A
-                html+="運費:"+freight_A+"元<br/>";
-          }
-          else
-          {
-                html+="運費:免費(滿"+free_shipping_money+"元)<br/>";
-          }
-  }
-  if(pickup=="大榮宅配 (運費150)")  
-  {
-                if(money<free_shipping_money) 
-          {
-                money+=freight_B
-                html+="運費:"+freight_B+"元<br/>";
-          }
-          else
-          {
-                html+="運費:免費(滿"+free_shipping_money+"元)<br/>";
-          }
-  }
-    
-  html+="總費用為"+money+"元<br/>";
-  html+="-----轉帳匯款資訊------------<br/>";
-  html+="銀行名稱：第一商業銀行(代碼:007)<br/>";
-  html+="分行名稱：長泰分行<br/>";
-  html+="戶名：德裕菖有限公司<br/>";
-  html+="帳號：212-10-133433<br/>";
-
-  return html;
 }
 
 function sendEmail( recipient, title, content )

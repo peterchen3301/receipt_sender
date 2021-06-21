@@ -1,9 +1,14 @@
 // deploy as web app to see html layout
 function doGet() {
+  return getReceipt(test_data);
+}
+
+function getReceipt(data)
+{
   var template = HtmlService.createTemplateFromFile('Receipt');
-  template.dataFromServerTemplate = parseOrder(test_data);
-  Logger.log(parseOrder(test_data))
-  Logger.log(template.evaluate().getContent());
+  template.dataFromServerTemplate = parseOrder(data);
+  //Logger.log(parseOrder(data))
+  //Logger.log(template.evaluate().getContent());
   return template.evaluate();
 }
 
@@ -47,9 +52,9 @@ function calcDiscount(data, init_price)
   ret["refund"] = refund;
   discounted_price -= refund;
   
-  // solve for ship fee
+  // shipping fee
   var ship_method = getMap('ship_method');
-  if ( discounted_price >= discount_plans['freeship_thres'] ) // ship fee exempted
+  if ( discounted_price >= discount_plans['freeship_thres'] ) // shipping fee exempted
   {
     ret["ship_fee"] = 0
   }

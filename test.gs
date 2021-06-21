@@ -47,25 +47,14 @@ function test_getReceipt()
 
 function test_receipt()
 {
-  var template = HtmlService.createTemplateFromFile('Receipt');
-  template.dataFromServerTemplate = parseOrder(test_data);
-  Logger.log(parseOrder(test_data))
-  Logger.log(template.evaluate().getContent());
-  return template.evaluate();
-  
+  return getReceipt(test_data);
 }
-
 
 function test_sendEmail()
 {
   //sendEmail("456", "test", "test"); // an error testcase
-
-  /*
-  var template = HtmlService.createTemplateFromFile('Receipt');
-  template.dataFromServerTemplate = parseOrder(test_data);
-  html = template.evaluate().getContent();
+  html = getReceipt(test_data).getContent();
   sendEmail("peterchen33011@gmail.com", "test", html ); 
-  */
 }
 
 function test_parseOrder()
