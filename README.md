@@ -1,2 +1,3 @@
 # receipt_sender
-A project that handles submitted orders and send email to each buyer.
+
+A google spreadsheet extension project that organize the received order, get prices in accordance with discount/shippinh plans, form receipt from html template, and auto-send to each buyer in email.
